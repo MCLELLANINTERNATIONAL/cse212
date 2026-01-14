@@ -13,7 +13,22 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Step 1: Initialize an array to store the multiples
+        // The array size should be equal to 'length'
+        double[] multiples = new double[length];
+
+        
+        // Step 2: Use the loop to generate each multiple
+        // Looping 'length' times, each time calculating a new multiple
+        for (int i = 0; i < multiples.Length; i++)
+        {
+            // Calculate the multiple by multiplying 'startingNumber' by (i + 1)
+            multiples[i] = number * (i + 1);
+            // Example: If startingNumber is 3 and i is 0, this gives 3 * 1 = 3
+            // If i is 1, this gives 3 * 2 = 6, and so on.
+        }
+
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +44,33 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Step 1: Calculate the split point
+        // This is where I will divide the  list into two parts
+        int splitPoint = data.Count - amount;
+
+        // Step 2: Get the two slices
+        // Slice 1 - is the last 'amount' elements that will be moved to the front
+        List<int> rotatedPart = data.GetRange(splitPoint, amount);
+        // Slice 2 - is the remaining elements that will be moved to the back
+        List<int> remainingPart = data.GetRange(0, splitPoint);
+
+        // Step 3: before combining the list, I will clear the original list
+        data.Clear(); // remove all elements from the original list
+        data.AddRange(rotatedPart); // add the rotated part first
+        data.AddRange(remainingPart); // add the remaining part last
+
+        // Now the list is rotated to the right by 'amount' places
+        /*
+        * List<int> data = new List<int> {7, 8, 9, 1, 2, 3, 4, 5, 6};
+        * int amount = 5;
+        *
+        * int splitPoint =  (data.Count - amount) → 9 - 5 = 4.
+        * 
+        * rotatedPart = data.GetRange(4, 5); → {5, 6, 7, 8, 9}
+        * remainingPart = data.GetRange(0, 4); → {1, 2, 3, 4}
+        *
+        * data =  {5, 6, 7, 8, 9} + {1, 2, 3, 4} → {5, 6, 7, 8, 9, 1, 2, 3, 4}
+        */
     }
 }
