@@ -45,6 +45,16 @@ public class TakingTurnsQueue
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
+            else if (person.Turns <= 0)
+            {
+                /*
+                * The else if statement handles the logic for a person
+                * with 0 or less turns, which equates to an infinite number
+                * of turns.  In this case, the person is added back into the
+                * queue with the same name and infinite number of turns.
+                */
+                _people.Enqueue(person);
+            }
 
             return person;
         }
