@@ -16,24 +16,24 @@
     }
 
     public string Dequeue()
+{
+    if (_queue.Count == 0)
+        throw new InvalidOperationException("The queue is empty.");
+
+    int highPriorityIndex = 0;
+
+    for (int index = 1; index < _queue.Count; index++)
     {
-        if (_queue.Count == 0) // Verify the queue is not empty
+        // Strictly greater keeps the earliest item when priorities tie (FIFO)
+        if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
         {
-            throw new InvalidOperationException("The queue is empty.");
+            highPriorityIndex = index;
         }
+    }
 
-        // Find the index of the item with the highest priority to remove
-        var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count; index++)
-        {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
-                highPriorityIndex = index;
-        }
-
-        // Remove and return the item with the highest priority
-        var highestPriorityItem = _queue[highPriorityIndex];
-        _queue.RemoveAt(highPriorityIndex); // Ensure the item is removed from the queue
-        return highestPriorityItem.Value;
+    string value = _queue[highPriorityIndex].Value;
+    _queue.RemoveAt(highPriorityIndex);
+    return value;
     }
 
     // DO NOT MODIFY THE CODE IN THIS METHOD
