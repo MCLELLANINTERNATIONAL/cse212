@@ -50,7 +50,7 @@ public static class Recursion
             return;
         }
 
-    //maller problem: iterate through each letter and remmove it from the pool
+    //smaller problem: iterate through each letter and remmove it from the pool
         for (int i = 0; i < letters.Length; i++)
         {
             char currentLetter = letters[i];
